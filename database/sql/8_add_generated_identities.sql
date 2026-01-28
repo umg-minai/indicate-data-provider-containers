@@ -1,0 +1,1 @@
+ALTER TABLE cds_cdm.observation ALTER COLUMN observation_id ADD GENERATED ALWAYS AS IDENTITY;
