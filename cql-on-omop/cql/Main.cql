@@ -21,22 +21,27 @@ define function ToObservation(indicatorConceptId Integer,
                                                        numerator   Integer,
                                                        denominator Integer,
                                                        qi          Decimal}):
-  (1) _
-    let dateTime: Now()
-      return OMOP.Observation{
-               observationConceptId:   indicatorConceptId,
-               observationTypeConcept: OMOPFunctions.SC(0),
-               observationDatetime:    dateTime,
-               observationDate:        date from dateTime,
-               //person:                 result.patient,
-               person:                 null,
-               valueAsNumber:          result.qi
-             }
+  if result.qi is null then
+    {}
+  else
+    {
+      (1) _
+        let dateTime: Now()
+          return OMOP.Observation{
+                   observationConceptId:   indicatorConceptId,
+                   observationTypeConcept: OMOPFunctions.SC(0),
+                   observationDatetime:    dateTime,
+                   observationDate:        date from dateTime,
+                   //person:                 result.patient,
+                   person:                 null,
+                   valueAsNumber:          result.qi
+                 }
+    }
 
 context Patient
 
 define Results:
-  {
+  Flatten({
     ToObservation(2000000101, "Qi01".Result),
     //ToObservation(2000000102, "Qi02".Result),
     ToObservation(2000000103, "Qi03".Result),
@@ -46,4 +51,4 @@ define Results:
     ToObservation(2000000107, "Qi07".Result)
     //ToObservation(2000000108, "Qi08".Result),
     //ToObservation(2000000109, "Qi09".Result)
-  }
+  })
