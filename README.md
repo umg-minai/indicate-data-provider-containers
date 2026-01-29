@@ -20,6 +20,85 @@ This project creates two container images:
    This engine applies CQL libraries which implement the INDICATE quality indicators to a database containing clinical data (which is distinct from the database in the `database` container).
    The results computed by the CQL libraries are stored in the `database` container for local inspection, aggregation and distribution as explained above.
 
+## Dependencies
+
+* PostgreSQL
+
+* https://github.com/umg-minai/cql-on-omop
+
+* https://github.com/aptible/supercronic
+
+* INDICATE CQL Libraries
+
+## Build
+
+### Obtain Dependencies
+
+1. cql-on-omop
+
+   TODO
+
+2. INDICATE Quality Indicator CQL Libraries
+
+   TODO
+
+### Set up Database Access
+
+1. Add connection data for the OMOP database which provides the
+   clinical data to `databases.env` in the root directory of this
+   repository.
+
+2. Enter the database password for that database into the file
+   `source-database-password` in the root directory of this
+   repository.
+
+3. Choose an arbitrary password for the internal database in the
+   "database" container and enter that password into the file
+   `target-database-password` in the root directory of this
+   repository. One way to do this is
+
+   ```sh
+   echo INDICATE | mkpasswd -m descrypt -s > target-database-password
+   ```
+
+### Build the Images
+
+Execute
+
+```sh
+docker-compose build
+```
+
+in the root directory of this repository.
+
 ## Usage
 
-TODO
+### Create and Start
+
+To create and start the containers, run
+
+```sh
+docker-compose run -d
+```
+
+in the root directory of this repository.
+
+### Stop
+
+To stop the containers, run
+
+```sh
+docker-compose stop
+```
+
+in the root directory of this repository.
+
+### Start again after stopping
+
+To start the containers again after stopping, run
+
+```sh
+docker-compose start
+```
+
+in the root directory of this repository.
