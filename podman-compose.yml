@@ -4,7 +4,10 @@ services:
     build: database
     shm_size: 128mb
     environment:
-      POSTGRES_PASSWORD=mysecretpassword
+      POSTGRES_PASSWORD_FILE=/run/secrets/database-password
+    secrets:
+      - source: target-database-password
+        target: database-password
     networks:
       - database
     volumes:
@@ -15,6 +18,9 @@ services:
   cql-on-omop:
     build: cql-on-omop
     env_file: databases.env
+    secrets:
+      - source-database-password
+      - target-database-password
     stop_signal: SIGQUIT
     networks:
       - database
@@ -28,3 +34,9 @@ networks:
 volumes:
   data:
     external: no
+
+secrets:
+  source-database-password:
+    file: source-database-password
+  target-database-password:
+    file: target-database-password
