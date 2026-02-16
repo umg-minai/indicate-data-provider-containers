@@ -52,6 +52,7 @@ echo "Using previous run time ${PREVIOUS_RUN_TIMESTAMP}"
 NOW=$(date +'@%Y-%m-%dT%H:%M:%S')
 REVIEW_PERIOD="Interval[${PREVIOUS_RUN_TIMESTAMP}, ${NOW})"
 
+echo -e "\e[1mComputing quality indicators\e[0m"
 # TODO(moringenj): should not use --password for target db
 # TODO(moringenj): MIMIC is temporary
 CQL_ON_OMOP_DATABASE_PASSWORD=$(cat /run/secrets/source-database-password) \
@@ -83,6 +84,7 @@ CQL_ON_OMOP_DATABASE_PASSWORD=$(cat /run/secrets/source-database-password) \
         --no-print-notes
 
 # Insert marker for this run
+echo -e "\e[1mInserting marker into database\e[0m"
 sql_in_target_db \
 "INSERT INTO ${TARGET_DB_SCHEMA}.observation
         (observation_concept_id, observation_type_concept_id, observation_datetime, observation_date, person_id)
