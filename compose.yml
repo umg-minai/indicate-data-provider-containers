@@ -6,7 +6,7 @@ services:
     build: database
     shm_size: 128mb
     environment:
-      POSTGRES_PASSWORD_FILE=/run/secrets/database-password
+      POSTGRES_PASSWORD_FILE: /run/secrets/database-password
     secrets:
       - source: target-database-password
         target: database-password
@@ -19,7 +19,9 @@ services:
   # quality indicators and stores results in the database service.
   cql-on-omop:
     build: cql-on-omop
-    env_file: databases.env
+    env_file:
+      - source-database.env
+      - target-database.env
     secrets:
       - source-database-password
       - target-database-password
@@ -37,9 +39,9 @@ services:
   # database service and sends them to the INDICATE hub.
   data-exchange:
     build: data-exchange
-    env_file: databases.env # TODO: needs only qi database
-    environment:
-      DATA_EXCHANGE_ENDPOINT: http://host.containers.internal:8080
+    env_file:
+      - target-database.env
+      - data-exchange.env
     secrets:
       - source: target-database-password # TODO: change "source" and "target"
         target: database-password
