@@ -13,7 +13,7 @@ This project creates the following container images:
    At runtime, the database is used to store the results of evaluating quality indicators.
    The stored results can be used for two purposes:
    1. The data provider can inspect conformance to the INDICATE quality indicators on a per-patient level.
-   2. The stored results are aggregated via views or stored procedures into a ward-level representation.
+   2. The stored results are aggregated via views into a ward-level representation.
       This aggregated data is sent (without identifiable information) to the central benchmarking service for distribution to all data providers.
 
 2. The `cql-on-omop` container contains an evaluation engine for CQL libraries.
@@ -73,7 +73,7 @@ This project creates the following container images:
    repository.
 
 3. Choose an arbitrary password for the internal database in the
-   "database" container and enter that password into the file
+   `database` container and enter that password into the file
    `target-database-password` in the root directory of this
    repository. One way to do this is
 
