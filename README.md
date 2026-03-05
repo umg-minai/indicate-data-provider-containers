@@ -20,7 +20,7 @@ This project creates the following container images:
    This engine applies CQL libraries which implement the INDICATE quality indicators to a database containing clinical data (which is distinct from the database in the `database` container).
    The results computed by the CQL libraries are stored in the `database` container for local inspection, aggregation and distribution as explained above.
 
-3. The `data-exchange` container contains a simple program that uploads quality indicator results.
+3. The `data-exchange` container contains a simple program that uploads aggregated quality indicator results to the INDICATE central hub..
    To this end, the program fetches aggregated quality indicator results from the `database` container and uploads them, together with a unique id for the data provider, to the hub node of the INDICATE quality indicator dashboard architecture.
 
 ## Dependencies
@@ -48,7 +48,9 @@ This project creates the following container images:
 
 3. INDICATE Data Exchange Client
 
-   TODO
+   This dependency will be obtained automatically from the GitHub
+   Container Registry at
+   https://github.com/umg-minai/indicate-data-exchange-client/pkgs/container/indicate-data-exchange-client.
 
 ### Set up Database Access
 
@@ -68,6 +70,13 @@ This project creates the following container images:
    ```sh
    echo INDICATE | mkpasswd -m descrypt -s > target-database-password
    ```
+
+### Set up Data Exchange (optional)
+
+If default settings for communication with the INDICATE data exchange
+server are not appropriate, customize the settings as described below.
+
+1. TODO DATA_EXCHANGE_ENDPOINT
 
 ### Build the Images
 
