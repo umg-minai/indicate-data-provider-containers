@@ -1,6 +1,5 @@
 FROM ghcr.io/umg-minai/indicate-data-exchange-client:latest
 
-
 RUN DEBIAN_FRONTEND=noninteractive apt-get --assume-yes update     \
     && DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install \
          uuid                                                      \
