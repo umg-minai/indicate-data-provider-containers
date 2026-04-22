@@ -1,4 +1,4 @@
-FROM ghcr.io/umg-minai/indicate-data-exchange-client:1.1.0
+FROM ghcr.io/umg-minai/indicate-data-exchange-client:1.1.1
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get --assume-yes update     \
     && DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install \
